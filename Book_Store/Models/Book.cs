@@ -13,9 +13,13 @@ namespace Book_Store.Models
         public string? BookName { get; set; }
 
         [Required]
+        [MaxLength(40)]
+        public string? AuthorName { get; set; }
+
+        [Required]
         public double Price { get; set; }
 
-        public string? MyProperty { get; set; }
+        public string? Image { get; set; }
 
         [Required]
         public Guid GenreId { get; set; }
