@@ -6,7 +6,7 @@ namespace Book_Store.Models
     [Table("Book")]
     public class Book
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(40)]
@@ -22,7 +22,7 @@ namespace Book_Store.Models
         public string? Image { get; set; }
 
         [Required]
-        public Guid GenreId { get; set; }
+        public int GenreId { get; set; }
 
         [ForeignKey("GenreId")]
         public Genre Genre { get; set; }
@@ -30,5 +30,8 @@ namespace Book_Store.Models
         public List<OrderDetail> OrderDetail { get; set; }
 
         public List<CartDetail> CartDetail { get; set; }
+
+        [NotMapped]
+        public string GenreName { get; set; }
     }
 }

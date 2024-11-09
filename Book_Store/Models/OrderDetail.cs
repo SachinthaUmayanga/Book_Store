@@ -6,13 +6,13 @@ namespace Book_Store.Models
     [Table("OrderDetail")]
     public class OrderDetail
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public Guid OrderId { get; set; }
+        public int OrderId { get; set; }
 
         [Required]
-        public Guid BookId { get; set; }
+        public int BookId { get; set; }
 
         [Required]
         public int Quanity { get; set; }

@@ -1,4 +1,4 @@
-using Book_Store.Data;
+using Book_Store;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,9 +21,10 @@ builder.Services
     .AddDefaultUI()
     .AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 
 var app = builder.Build();
-//using(var scope = app.Services.CreateScope())
+//using (var scope = app.Services.CreateScope())
 //{
 //    await DbSeeder.SeedDefaultData(scope.ServiceProvider);
 //}

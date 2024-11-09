@@ -6,10 +6,10 @@ namespace Book_Store.Models
     [Table("OrderStatus")]
     public class OrderStatus
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        public Guid StatusId { get; set; }
+        public int StatusId { get; set; }
 
         [Required]
         [MaxLength(20)]

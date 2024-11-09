@@ -6,7 +6,7 @@ namespace Book_Store.Models
     [Table("Genre")]
     public class Genre
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(40)]

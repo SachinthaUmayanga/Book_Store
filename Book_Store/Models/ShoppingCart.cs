@@ -6,7 +6,7 @@ namespace Book_Store.Models
     [Table("ShoppingCart")]
     public class ShoppingCart
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string UserId { get; set; }
