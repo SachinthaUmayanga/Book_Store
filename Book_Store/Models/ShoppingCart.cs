@@ -13,6 +13,6 @@ namespace Book_Store.Models
 
         public bool IsDeleted { get; set; } = false;
 
-
+        public ICollection<CartDetail> CartDetails { get; set; }
     }
 }
