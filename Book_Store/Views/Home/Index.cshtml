@@ -1,46 +1,58 @@
-﻿@{
+﻿@model BookDisplayModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
 
 <div class="my-2">
-    <form class="row row-cols-lg-auto g-3 align-items-center">
+    <form asp-action="Index" class="row row-cols-lg-auto g-3 align-items-center">
       
 
-      <div class="col-12">
-        <label class="visually-hidden" for="inlineFormSelectPref">Genres</label>
-        <select class="form-select" id="genreId">
-          <option selected>Choose...</option>
-          <option value="1">Action</option>
-          <option value="2">Horror</option>
-          <option value="3">Romance</option>
-        </select>
-      </div>
+        <div class="col-12">
+            <label class="visually-hidden" for="genreId">Genres</label>
+            <select class="form-select" id="genreId" name="genreId">
+                <option selected>All</option>
+                @foreach (var genre in Model.Genres)
+                {
+                    <option selected="@(genre.Id == Model.GenreId)" value="@genre.Id">@genre.GenreName</option>
+                }
+                
+            </select>
+        </div>
 
         <div class="col-12">
-            <label class="visually-hidden" for="inlineFormInputGroupUsername">Search by title</label>
+            <label class="visually-hidden" for="sterm">Search by title</label>
             <div class="input-group">
                 <div class="input-group-text"></div>
-                <input type="text" class="form-control" id="" placeholder="Search by title">
+                <input type="text" class="form-control" value="@Model.STerm" id="sterm" name="sterm" placeholder="Search by title">
             </div>
         </div>
 
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary">Search</button>
-      </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
     </form>
 </div>
 
 <div class="w-100 mt-4 d-flex flex-wrap">
-    @for (int i = 1; i <= 8; i++)
+    @foreach (var book in Model.Books)
     {
         <div class="card mx-2 mb-4" style="width: 16rem;">
-            <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
+            @if (string.IsNullOrEmpty(book.Image))
+            {
+                <img src="/images/Untitled.png" class="card-img-top" alt="...">
+            }
+            else
+            {
+                <img src="/images/@book.Image" class="card-img-top" alt="...">
+            }
+            
             <div class="card-body">
-                <h5 class="card-title">Book title</h5>
+                <h5 class="card-title">@book.BookName</h5>
                 <p class="card-text">
-                    Author:
-                    Price:
+                    Genre: @book.GenreName<br />
+                    Author: @book.AuthorName<br />
+                    Price: @book.Price
                 </p>
                 <a href="#" class="btn btn-primary">Add to Cart</a>
             </div>

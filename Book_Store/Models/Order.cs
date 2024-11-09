@@ -6,7 +6,7 @@ namespace Book_Store.Models
     [Table("Order")]
     public class Order
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string UserId { get; set; }
@@ -15,7 +15,7 @@ namespace Book_Store.Models
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;
 
         [Required]
-        public Guid OrderStatusId { get; set; }
+        public int OrderStatusId { get; set; }
 
         public bool IsDeleted { get; set; } = false;
 
