@@ -17,6 +17,9 @@ namespace Book_Store.Models
         [Required]
         public int Quantity { get; set; }
 
+        [Required]
+        public double UnitPrice { get; set; }
+
         [ForeignKey("BookId")]
         public Book Book { get; set; }
 
