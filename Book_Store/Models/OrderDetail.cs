@@ -15,7 +15,7 @@ namespace Book_Store.Models
         public int BookId { get; set; }
 
         [Required]
-        public int Quanity { get; set; }
+        public int Quantity { get; set; }
 
         [Required]
         public double UnitPrice { get; set; }

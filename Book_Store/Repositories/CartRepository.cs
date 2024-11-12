@@ -165,7 +165,7 @@ namespace Book_Store.Repositories
                     {
                         BookId = item.BookId,
                         OrderId = order.Id,
-                        Quanity = item.Quantity,
+                        Quantity = item.Quantity,
                         UnitPrice = item.UnitPrice
                     };
                     _db.OrderDetails.Add(orderDetail);
