@@ -21,6 +21,19 @@ public class AdminOperationsController : Controller
         return View(orders);
     }
 
+    public async Task<IActionResult> TogglePaymentStatus(int orderId)
+    {
+        try
+        {
+            await _userOrderRepository.TogglePaymentStatus(orderId);
+        }
+        catch (Exception ex)
+        {
+            // log exception here
+        }
+        return RedirectToAction(nameof(AllOrders));
+    }
+
     public async Task<IActionResult> UpdateOrderStatus(int orderId)
     {
         var order = await _userOrderRepository.GetOrderById(orderId);
