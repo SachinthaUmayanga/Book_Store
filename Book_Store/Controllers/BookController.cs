@@ -1,5 +1,4 @@
 ﻿using Book_Store.Shared;
-using BookShoppingCartMvcUI.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
