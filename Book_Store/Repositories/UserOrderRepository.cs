@@ -62,7 +62,7 @@ namespace Book_Store.Repositories
             {
                 var userId = GetUserId();
                 if (string.IsNullOrEmpty(userId))
-                    throw new Exception("User is not logged in");
+                    throw new InvalidOperationException("User is not logged in");
                 orders = orders.Where(x => x.UserId == userId);
                 return await orders.ToListAsync();
             }
