@@ -6,7 +6,7 @@
 }
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-lg p-4 rounded-3" style="max-width: 400px; width: 100%;">
+    <div class="card shadow-lg p-4 rounded-3" style="max-width: 600px; width: 100%;">
         <h2 class="text-center text-primary mb-4">@ViewData["Title"]</h2>
         <form id="account" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
@@ -36,9 +36,9 @@
             <div class="text-center mt-2">
                 <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-decoration-none">Register as a new user</a>
             </div>
-            <div class="text-center mt-2">
+            @* <div class="text-center mt-2">
                 <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="text-decoration-none">Resend email confirmation</a>
-            </div>
+            </div> *@
         </form>
     </div>
 </div>

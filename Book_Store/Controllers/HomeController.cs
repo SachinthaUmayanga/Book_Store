@@ -32,7 +32,12 @@ namespace Book_Store.Controllers
             return View(bookModel);
         }
 
-        public IActionResult Privacy()
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
+
+        public IActionResult About()
         {
             return View();
         }
