@@ -1,6 +1,5 @@
 using Book_Store;
 using Book_Store.Shared;
-using BookShoppingCartMvcUI.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using static Book_Store.Repositories.StockRepository;
