@@ -1,0 +1,53 @@
+.slick-prev{
+   background-image: url('/images/pre-arrow.png') !important;
+   background-repeat: no-repeat;
+   height: 35px;
+}
+.slick-prev::before{
+    content: none;
+    display: none;
+}
+.slick-prev:hover{
+    background-repeat: no-repeat;
+}
+.slick-prev:focus{
+    background-repeat: no-repeat;
+}
+.slick-next{
+    background-image: url('/images/next-arrow.png') !important;
+    background-repeat: no-repeat;
+    height: 35px;
+    right: -40px;
+}
+ .slick-next::before{
+    content: none;
+    display: none;
+}
+.slick-next:hover{
+    background-repeat: no-repeat;
+}
+.slick-next:focus{
+    background-repeat: no-repeat;
+}
+.slider-element{
+    /* height: 250px; */
+    position: relative;
+}
+.book-status{
+    
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    height: 25px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    border-radius: 0 15px;
+}
+.price{
+    color: #00c6dd;
+}
