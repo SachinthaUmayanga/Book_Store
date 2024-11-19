@@ -4,11 +4,9 @@
 }
 
 
-<div class="my-2">
-    <form asp-action="Index" class="row row-cols-lg-auto g-3 align-items-center">
-      
-
-        <div class="col-12">
+<div class="my-4 d-flex align-items-center justify-content-center w-100">
+    <form asp-action="Index" class="d-flex flex-row gap-4 align-items-center w-100 ">
+        <div class="col-3">
             <label class="visually-hidden" for="genreId">Genres</label>
             <select class="form-select" id="genreId" name="genreId">
                 <option selected>All</option>
@@ -16,24 +14,327 @@
                 {
                     <option selected="@(genre.Id == Model.GenreId)" value="@genre.Id">@genre.GenreName</option>
                 }
-                
+
             </select>
         </div>
-
-        <div class="col-12">
+        <div class="flex-grow-1">
             <label class="visually-hidden" for="sterm">Search by title</label>
             <div class="input-group">
-                <div class="input-group-text"></div>
-                <input type="text" class="form-control" value="@Model.STerm" id="sterm" name="sterm" placeholder="Search by title">
+                <div class="input-group-text"><i class="bi bi-search"></i></div>
+                <input type="text" class="form-control" value="@Model.STerm" id="sterm" name="sterm"
+                    placeholder="Search by title">
             </div>
         </div>
-
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Search</button>
+        <div class="col-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
         </div>
     </form>
 </div>
 
+<div>
+    <h3>New arrivals </h3>
+    <hr class="hr" />
+    <div>
+        <div class="slider gap-4">
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz1.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz2.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz1.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz2.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <h3> Used Books</h3> </h3>
+    <hr class="hr" />
+    <div>
+        <div class="slider gap-4">
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz1.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz2.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz1.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz2.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slider-element">
+                    <div class="book-status text-bg-danger">In Stock</div>
+                    <img class="p-4 pb-0" width="180px" height="200px"
+                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+                    <div class="p-4 pt-2">
+                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
+                        <p class="mb-0 text-center">book-status</p>
+                        <p class="mb-0 text-center price">LKR 200</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="w-100 mt-4 d-flex flex-wrap">
     @foreach (var book in Model.Books)
     {
@@ -42,11 +343,11 @@
             {
                 <img src="/images/Untitled.png" class="card-img-top" alt="...">
             }
-            else
+            elsez
             {
-                <img src="/images/@book.Image" class="card-img-top" alt="...">
+            <img src="/images/@book.Image" class="card-img-top" alt="...">
             }
-            
+
             <div class="card-body">
                 <h5 class="card-title">@book.BookName</h5>
                 <p class="card-text">
@@ -69,7 +370,7 @@
 </div>
 
 
-@section Scripts{
+@section Scripts {
     <script>
         async function add(bookId) {
             var usernameEl = document.getElementById("username");
@@ -93,5 +394,27 @@
                 console.log(err);
             }
         }
+    </script>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" rel="stylesheet" />
+    <link href="/css/search.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+            $('.slider').slick({
+                slidesToShow: 8,
+                slidesToScroll: 1,
+                infinite: true,
+                cssEase: 'linear',
+                arrow: true,
+                dots: false,
+                centerPadding: '50px',
+                autoplay: true,
+                autoplaySpeed: 2000
+            });
+        });
     </script>
 }
