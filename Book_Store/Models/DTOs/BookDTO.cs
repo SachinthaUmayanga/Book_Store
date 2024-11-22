@@ -18,6 +18,9 @@ public class BookDTO
     public string? Image { get; set; }
     [Required]
     public int GenreId { get; set; }
+    [Required]
+    public string? BookCondition { get; set; }
     public IFormFile? ImageFile { get; set; }
     public IEnumerable<SelectListItem>? GenreList { get; set; }
+    public IEnumerable<SelectListItem>? ConditionList { get; set; }
 }

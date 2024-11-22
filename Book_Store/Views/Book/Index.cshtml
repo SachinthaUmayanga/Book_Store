@@ -15,6 +15,7 @@
             <th>Book</th>
             <th>Author</th>
             <th>Genre</th>
+            <th>Book Condition</th>
             <th>Price</th>
             <th>Action</th>
         </tr>
@@ -35,6 +36,7 @@
                 <td>@book.BookName</td>
                 <td>@book.AuthorName</td>
                 <td>@book.Genre.GenreName</td>
+                <td>@book.BookCondition</td>
                 <td>@book.Price</td>
                 <td>
                     <a asp-action="UpdateBook" asp-controller="Book" asp-route-id="@book.Id" class="btn btn-success">Edit</a>

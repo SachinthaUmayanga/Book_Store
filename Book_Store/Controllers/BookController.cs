@@ -1,4 +1,5 @@
-﻿using Book_Store.Shared;
+﻿using Book_Store.Models;
+using Book_Store.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -32,7 +33,15 @@ public class BookController : Controller
             Text = genre.GenreName,
             Value = genre.Id.ToString(),
         });
-        BookDTO bookToAdd = new() { GenreList = genreSelectList };
+        BookDTO bookToAdd = new()
+        {
+            GenreList = genreSelectList,
+            ConditionList = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "New", Value = "New"},
+                new SelectListItem{Text = "Used", Value = "Used"}
+            }
+        };
         return View(bookToAdd);
     }
 
@@ -45,6 +54,11 @@ public class BookController : Controller
             Value = genre.Id.ToString(),
         });
         bookToAdd.GenreList = genreSelectList;
+        bookToAdd.ConditionList = new List<SelectListItem>
+        {
+            new SelectListItem{Text = "New", Value = "New"},
+            new SelectListItem{Text = "Used", Value = "Used"}
+        };
 
         if (!ModelState.IsValid)
             return View(bookToAdd);
@@ -69,7 +83,8 @@ public class BookController : Controller
                 AuthorName = bookToAdd.AuthorName,
                 Image = bookToAdd.Image,
                 GenreId = bookToAdd.GenreId,
-                Price = bookToAdd.Price
+                Price = bookToAdd.Price,
+                BookCondition = bookToAdd.BookCondition
             };
             await _bookRepo.AddBook(book);
             TempData["successMessage"] = "Book is added successfully";
@@ -109,11 +124,17 @@ public class BookController : Controller
         BookDTO bookToUpdate = new()
         {
             GenreList = genreSelectList,
+            ConditionList = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "New", Value = "New", Selected = book.BookCondition == "New"},
+                new SelectListItem{Text = "Used", Value = "Used", Selected = book.BookCondition == "Used"}
+            },
             BookName = book.BookName,
             AuthorName = book.AuthorName,
             GenreId = book.GenreId,
             Price = book.Price,
-            Image = book.Image
+            Image = book.Image,
+            BookCondition = book.BookCondition
         };
         return View(bookToUpdate);
     }
@@ -128,6 +149,11 @@ public class BookController : Controller
             Selected = genre.Id == bookToUpdate.GenreId
         });
         bookToUpdate.GenreList = genreSelectList;
+        bookToUpdate.ConditionList = new List<SelectListItem>
+        {
+            new SelectListItem{Text = "New", Value = "New", Selected = bookToUpdate.BookCondition == "New"},
+            new SelectListItem{Text = "Used", Value = "Used", Selected = bookToUpdate.BookCondition == "Used"}
+        };
 
         if (!ModelState.IsValid)
             return View(bookToUpdate);
@@ -155,7 +181,8 @@ public class BookController : Controller
                 AuthorName = bookToUpdate.AuthorName,
                 GenreId = bookToUpdate.GenreId,
                 Price = bookToUpdate.Price,
-                Image = bookToUpdate.Image
+                Image = bookToUpdate.Image,
+                BookCondition = bookToUpdate.BookCondition
             };
             await _bookRepo.UpdateBook(book);
             // if image is updated, then delete it from the folder too
