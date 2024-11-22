@@ -27,6 +27,9 @@ namespace Book_Store.Models
         [ForeignKey("GenreId")]
         public Genre Genre { get; set; }
 
+        [Required]
+        public string? BookCondition { get; set; }
+
         public List<OrderDetail> OrderDetail { get; set; }
 
         public List<CartDetail> CartDetail { get; set; }

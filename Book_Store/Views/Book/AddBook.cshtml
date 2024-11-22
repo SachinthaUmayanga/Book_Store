@@ -36,6 +36,16 @@
         </div>
 
         <div class="my-2">
+            <label>Condition*</label>
+            <select class="form-control" asp-for="BookCondition">
+                <option value="">Select Condition</option>
+                <option value="New">New</option>
+                <option value="Used">Used</option>
+            </select>
+            <span asp-validation-for="BookCondition" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
             <label>Image</label>
             <input type="file" class="form-control" asp-for="ImageFile" />
         </div>
