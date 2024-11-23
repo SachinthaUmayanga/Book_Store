@@ -76,7 +76,7 @@ public class AdminOperationsController : Controller
             // catch exception here
             TempData["errorMessage"] = "Something went wrong";
         }
-        return RedirectToAction(nameof(UpdateOrderStatus), new { orderId = data.OrderId });
+        return RedirectToAction(nameof(AllOrders), new { orderId = data.OrderId });
     }
 
     public IActionResult Dashboard()
