@@ -16,17 +16,18 @@ namespace Book_Store.Controllers
             _homeRepository = homeRepository;
         }
 
-        public async Task<IActionResult> Index(string sterm = "", int genreId = 0)
+        public async Task<IActionResult> Index(string sterm = "", int genreId = 0, string condition = "")
         {
             
-            IEnumerable<Book> books = await _homeRepository.GetBooks(sterm, genreId);
+            IEnumerable<Book> books = await _homeRepository.GetBooks(sterm, genreId, condition);
             IEnumerable<Genre> genres = await _homeRepository.Genres();
             BookDisplayModel bookModel = new BookDisplayModel
             {
                 Books = books,
                 Genres = genres,
                 STerm = sterm,
-                GenreId = genreId
+                GenreId = genreId,
+                BookCondition = condition
             };
 
             return View(bookModel);

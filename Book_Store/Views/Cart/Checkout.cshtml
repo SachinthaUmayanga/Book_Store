@@ -31,7 +31,7 @@
     </div>
 
     <div class="py-2">
-        <span class="mr-2">COD*</span>
+        <span class="mr-2">Payment Method*</span>
         <select asp-for="PaymentMethod" class="form-control">
             <option value="">Select Payment Method</option>
             @foreach (var method in Enum.GetValues(typeof(Book_Store.Constants.PaymentMethods)))
