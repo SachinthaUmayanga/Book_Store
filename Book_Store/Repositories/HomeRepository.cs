@@ -17,7 +17,7 @@ namespace Book_Store.Repositories
             return await _db.Genres.ToListAsync();
         }
 
-        public async Task<IEnumerable<Book>> GetBooks(string sTerm = "", int genreId = 0)
+        public async Task<IEnumerable<Book>> GetBooks(string sTerm = "", int genreId = 0, string conditon = "")
         {
             sTerm = sTerm.ToLower();
             IEnumerable<Book> books = await (from book in _db.Books
@@ -28,6 +28,7 @@ namespace Book_Store.Repositories
                          into book_stocks
                          from bookWithStock in book_stocks.DefaultIfEmpty()
                          where string.IsNullOrWhiteSpace(sTerm) || (book != null && book.BookName.ToLower().StartsWith(sTerm))
+                         && (string.IsNullOrEmpty(conditon) || book.BookCondition == conditon)
                          select new Book
                          {
                              Id = book.Id,
@@ -37,6 +38,7 @@ namespace Book_Store.Repositories
                              GenreId = book.GenreId,
                              Price = book.Price,
                              GenreName = genre.GenreName,
+                             BookCondition = book.BookCondition,
                              Quantity = bookWithStock==null ? 0 : bookWithStock.Quantity
                          }
                          ).ToListAsync();

@@ -38,7 +38,7 @@
     <hr class="hr" />
     <div>
         <div class="slider gap-4">
-            @foreach (var book in Model.Books)
+            @foreach (var book in Model.Books.Where(b => b.BookCondition == "New"))
             {
                 <div class="book-card">
                     <div class="p-4 pt-2 text-center d-flex flex-column justify-content-center align-items-center">
@@ -50,9 +50,14 @@
                         {
                             <img class="p-4 pb-0" width="180px" height="200px" src="/images/@book.Image" alt="...">
                         }
-                        <p class="mb-0 text-uppercase fs-6 text-center">@book.BookName</p>
+                        <p class="mb-0 text-uppercase fs-6 text-center text-truncate" style="max-width: 140px; cursor: pointer;"
+                        title="@book.BookName" data-bs-toggle="tooltip" data-bs-placement="top">
+                            @book.BookName
+                        </p>
                         <p class="mb-0 text-center">@book.GenreName</p>
+                        @* <p class="mb-0 text-center">@book.BookCondition</p> *@
                         <p class="mb-0 text-center price">LKR @book.Price</p>
+                        
                         @if (book.Quantity > 0)
                         {
                             <button type="button" onclick="add(@book.Id)" class="btn btn-primary">Add to Cart</button>
@@ -74,188 +79,41 @@
     <hr class="hr" />
     <div>
         <div class="slider gap-4">
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz1.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
+            @foreach (var book in Model.Books.Where(b => b.BookCondition == "Used"))
+            {
+                <div class="book-card">
+                    <div class="p-4 pt-2 text-center d-flex flex-column justify-content-center align-items-center">
+                        @if (string.IsNullOrEmpty(book.Image))
+                        {
+                            <img class="p-4 pb-0" width="180px" height="200px" src="/images/Untitled.png" alt="...">
+                        }
+                        else
+                        {
+                            <img class="p-4 pb-0" width="180px" height="200px" src="/images/@book.Image" alt="...">
+                        }
+                        <p class="mb-0 text-uppercase fs-6 text-center text-truncate" style="max-width: 140px; cursor: pointer;"
+                           title="@book.BookName" data-bs-toggle="tooltip" data-bs-placement="top">
+                            @book.BookName
+                        </p>
+                        <p class="mb-0 text-center">@book.GenreName</p>
+                        @* <p class="mb-0 text-center">@book.BookCondition</p> *@
+                        <p class="mb-0 text-center price">LKR @book.Price</p>
+
+                        @if (book.Quantity > 0)
+                        {
+                            <button type="button" onclick="add(@book.Id)" class="btn btn-primary">Add to Cart</button>
+                        }
+                        else
+                        {
+                            <span style="border: 1px solid; padding: 5px 8px; color: red; border-radius: 5px;">Out of stock</span>
+                        }
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz2.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz1.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz2.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="slider-element">
-                    <div class="book-status text-bg-danger">In Stock</div>
-                    <img class="p-4 pb-0" width="180px" height="200px"
-                        src="http://kenwheeler.github.io/slick/img/fonz3.png" />
-                    <div class="p-4 pt-2">
-                        <p class="mb-0 text-uppercase fs-6 text-center">book-status #cartCount</p>
-                        <p class="mb-0 text-center">book-status</p>
-                        <p class="mb-0 text-center price">LKR 200</p>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
 
-
-@* <div class="w-100 mt-4 d-flex flex-wrap">
-    @foreach (var book in Model.Books)
-    {
-        <div class="card mx-2 mb-4" style="width: 17rem;">
-            @if (string.IsNullOrEmpty(book.Image))
-            {
-                <img src="/images/Untitled.png" class="card-img-top" alt="...">
-            }
-            else
-            {
-                <img src="/images/@book.Image" class="card-img-top" alt="...">
-            }
-
-            <div class="card-body">
-                <h5 class="card-title">@book.BookName</h5>
-                <p class="card-text">
-                    <b>Genre: </b>@book.GenreName<br />
-                    <b>Author: </b>@book.AuthorName<br />
-                    <b>Price: </b>@book.Price
-                    @* <br /><b>@book.Quantity</b> 
-                </p>
-                @if (book.Quantity > 0)
-                {
-                    <button type="button" onclick="add(@book.Id)" class="btn btn-primary">Add to Cart</button>
-                }
-                else
-                {
-                    <span style="border: 1px solid; padding: 5px 8px; color: red; border-radius: 5px;">Out of stock</span>
-                }
-            </div>
-        </div>
-    }
-</div> *@
 
 
 @section Scripts {
@@ -305,22 +163,14 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+    </script>
 }
 
-<style>
-    .book-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-        .book-card img {
-            margin-bottom: 10px; /* Optional spacing between the image and text */
-        }
-
-        .book-card p {
-            margin: 5px 0; /* Adjust the spacing between paragraphs */
-        }
-
-</style>
