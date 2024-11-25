@@ -43,6 +43,8 @@
     font-size: 17px;
     color: #ffffff;
     display: block;
+    transition: all 0.3s ease;
+    gap: 10px;
 }
 
 .sidenav a:hover {
