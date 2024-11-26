@@ -48,5 +48,16 @@ namespace Book_Store.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet("Home/BookDetails/{bookId}")]
+        public async Task<IActionResult> BookDetails(int bookId)
+        {
+            var book = await _homeRepository.GetBookById(bookId);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return View(book);
+        }
     }
 }

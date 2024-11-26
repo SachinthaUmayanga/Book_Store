@@ -49,5 +49,28 @@ namespace Book_Store.Repositories
             }
             return books;
         }
+
+        public async Task<Book> GetBookById(int bookId)
+        {
+            var book = await (from b in _db.Books
+                              join genre in _db.Genres on b.GenreId equals genre.Id
+                              join stock in _db.Stocks on b.Id equals stock.BookId into book_stocks
+                              from bookWithStock in book_stocks.DefaultIfEmpty()
+                              where b.Id == bookId
+                              select new Book
+                              {
+                                  Id = b.Id,
+                                  Image = b.Image,
+                                  AuthorName = b.AuthorName,
+                                  BookName = b.BookName,
+                                  GenreId = b.GenreId,
+                                  Price = b.Price,
+                                  GenreName = genre.GenreName,
+                                  BookCondition = b.BookCondition,
+                                  Quantity = bookWithStock == null ? 0 : bookWithStock.Quantity
+                              }).FirstOrDefaultAsync();
+
+            return book;
+        }
     }
 }

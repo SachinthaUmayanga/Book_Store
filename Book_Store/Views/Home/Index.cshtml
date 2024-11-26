@@ -44,14 +44,14 @@
                     <div class="p-4 pt-2 text-center d-flex flex-column justify-content-center align-items-center">
                         @if (string.IsNullOrEmpty(book.Image))
                         {
-                            <img class="p-4 pb-0" width="180px" height="200px" src="/images/Untitled.png" alt="...">
+                            <img class="p-4 pb-0" width="180px" height="200px" src="/images/Untitled.png" onclick="navigateToBookDetails(@book.Id)" alt="...">
                         }
                         else
                         {
-                            <img class="p-4 pb-0" width="180px" height="200px" src="/images/@book.Image" alt="...">
+                            <img class="p-4 pb-0" width="180px" height="200px" src="/images/@book.Image" onclick="navigateToBookDetails(@book.Id)" alt="...">
                         }
                         <p class="mb-0 text-uppercase fs-6 text-center text-truncate" style="max-width: 140px; cursor: pointer;"
-                        title="@book.BookName" data-bs-toggle="tooltip" data-bs-placement="top">
+                        onclick="navigateToBookDetails(@book.Id)" title="@book.BookName" data-bs-toggle="tooltip" data-bs-placement="top">
                             @book.BookName
                         </p>
                         <p class="mb-0 text-center">@book.GenreName</p>
@@ -74,7 +74,7 @@
 </div>
 
 
-<div>
+<div class="mt-3">
     <h3> Used Books</h3> 
     <hr class="hr" />
     <div>
@@ -92,7 +92,7 @@
                             <img class="p-4 pb-0" width="180px" height="200px" src="/images/@book.Image" alt="...">
                         }
                         <p class="mb-0 text-uppercase fs-6 text-center text-truncate" style="max-width: 140px; cursor: pointer;"
-                           title="@book.BookName" data-bs-toggle="tooltip" data-bs-placement="top">
+                          onclick="navigateToBookDetails(@book.Id)" title="@book.BookName" data-bs-toggle="tooltip" data-bs-placement="top">
                             @book.BookName
                         </p>
                         <p class="mb-0 text-center">@book.GenreName</p>
@@ -171,6 +171,12 @@
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             })
         });
+    </script>
+
+    <script>
+        function navigateToBookDetails(bookId) {
+            window.location.href = `/Home/BookDetails/${bookId}`;
+        }
     </script>
 }
 
