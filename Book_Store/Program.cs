@@ -61,4 +61,10 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+app.MapControllerRoute(
+    name: "bookDetails",
+    pattern: "Home/BookDetails/{bookId}",
+    defaults: new { controller = "Home", action = "BookDetails" }
+);
+
 app.Run();
