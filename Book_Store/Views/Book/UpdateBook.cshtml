@@ -4,60 +4,64 @@
     Layout = "_AdminLayout";
 }
 
-<div style="width: 50%">
-    <h2>Update Book</h2>
-    <a asp-action="Index" asp-controller="Book" class="btn btn-primary">Back</a>
-    <form asp-action="UpdateBook" enctype="multipart/form-data">
-        <input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="Image" />
+<div class="nav-custom mb-4 py-2 d-flex justify-content-between align-items-center">
+    <h2 class="px-3 pt-2">Update Book</h2>
+    <a asp-action="Index" asp-controller="Book" class="btn btn-primary me-3">Back</a>
+</div>
+<div class="nav-custom mb-4 px-3 py-4">
+    <div style="width: 50%">
+        <form asp-action="UpdateBook" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Image" />
 
-        <div class="my-2">
-            <label>Book*</label>
-            <input type="text" class="form-control" asp-for="BookName" />
-            <span asp-validation-for="BookName" class="text-danger"></span>
-        </div>
+            <div class="my-2">
+                <label>Book*</label>
+                <input type="text" class="form-control" asp-for="BookName" />
+                <span asp-validation-for="BookName" class="text-danger"></span>
+            </div>
 
-        <div class="my-2">
-            <label>Author*</label>
-            <input type="text" class="form-control" asp-for="AuthorName" />
-            <span asp-validation-for="AuthorName" class="text-danger"></span>
-        </div>
+            <div class="my-2">
+                <label>Author*</label>
+                <input type="text" class="form-control" asp-for="AuthorName" />
+                <span asp-validation-for="AuthorName" class="text-danger"></span>
+            </div>
 
-        <div class="my-2">
-            <label>Genre*</label>
-            <select class="form-control" asp-for="GenreId" asp-items="Model.GenreList">
-                <option value="">Select Genre</option>
-            </select>
-            <span asp-validation-for="GenreId" class="text-danger"></span>
-        </div>
+            <div class="my-2">
+                <label>Genre*</label>
+                <select class="form-control" asp-for="GenreId" asp-items="Model.GenreList">
+                    <option value="">Select Genre</option>
+                </select>
+                <span asp-validation-for="GenreId" class="text-danger"></span>
+            </div>
 
-        <div class="my-2">
-            <label>Price*</label>
-            <input type="number" class="form-control" asp-for="Price" />
-            <span asp-validation-for="Price" class="text-danger"></span>
-        </div>
+            <div class="my-2">
+                <label>Price*</label>
+                <input type="number" class="form-control" asp-for="Price" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
 
-        <div class="my-2">
-            <label for="BookCondition">Book Condition*</label>
-            <select class="form-control" id="BookCondition" asp-for="BookCondition" asp-items="Model.ConditionList">
-                <option value="">Select Condition</option>
-            </select>
-            <span asp-validation-for="BookCondition" class="text-danger"></span>
-        </div>
+            <div class="my-2">
+                <label for="BookCondition">Book Condition*</label>
+                <select class="form-control" id="BookCondition" asp-for="BookCondition" asp-items="Model.ConditionList">
+                    <option value="">Select Condition</option>
+                </select>
+                <span asp-validation-for="BookCondition" class="text-danger"></span>
+            </div>
 
-        <div class="my-2">
-            <label>Image</label>
-            @if (!string.IsNullOrEmpty(Model.Image))
-            {
-                <img src="/images/@Model.Image" style="width:100px; height:80px" />
-            }
-            <input type="file" class="form-control" asp-for="ImageFile" />
-        </div>
+            <div class="my-2">
+                <label>Image</label>
+                @if (!string.IsNullOrEmpty(Model.Image))
+                {
+                    <img src="/images/@Model.Image" style="width:100px; height:80px" />
+                }
+                <input type="file" class="form-control" asp-for="ImageFile" />
+            </div>
 
-        <div class="my-2">
-            <button type="submit" class="btn btn-info">Update</button>
-        </div>
-    </form>
+            <div class="my-2">
+                <button type="submit" class="btn btn-info w-100">Update</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 

@@ -4,25 +4,30 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Genres</h2>
+<div class="nav-custom mb-4 py-2 d-flex justify-content-between align-items-center">
+    <h2 class="px-3 pt-2">
+        Genres
+    </h2>
+    <a asp-action="AddGenre" asp-controller="Genre" class="btn btn-primary me-3">Add More</a>
+</div>
+<div class="nav-custom mb-4 px-3 py-4">
 
-<a asp-action="AddGenre" asp-controller="Genre" class="btn btn-primary">Add More</a>
-
-<table class="table table-striped my-3">
-    <tr>
-        <th>Gere</th>
-        <th>Action</th>
-    </tr>
-
-    @foreach(var genre in Model)
-    {
+    <table class="table table-striped my-3">
         <tr>
-            <td>@genre.GenreName</td>
-            <td>
-                <a asp-action="UpdateGenre" asp-controller="Genre" asp-route-id="@genre.Id" class="btn btn-success">Edit</a>
-                <a asp-action="DeleteGenre" asp-controller="Genre" asp-route-id="@genre.Id" class="btn btn-danger" onclick="return window.confirm('Are you sure?')">Delete</a>
-            </td>
+            <th>Gere</th>
+            <th>Action</th>
         </tr>
-    }
-</table>
+
+        @foreach(var genre in Model)
+        {
+            <tr>
+                <td>@genre.GenreName</td>
+                <td>
+                    <a asp-action="UpdateGenre" asp-controller="Genre" asp-route-id="@genre.Id" class="btn btn-success">Edit</a>
+                    <a asp-action="DeleteGenre" asp-controller="Genre" asp-route-id="@genre.Id" class="btn btn-danger" onclick="return window.confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
 

@@ -12,34 +12,59 @@
 
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-
-    <link href="~/Book_Store.styles.css" rel="stylesheet" />
-
+     <link href="~/Book_Store.styles.css" rel="stylesheet" />
+    <link href="/css/dashboard.css" rel="stylesheet" />
 </head>
-<body>
+
+<body>  
     <div class="main-contaier">
-        <div class="sidenav">
-            <a class="navigation-link" href="/Home/Index"><i class="bi bi-house-door"></i> Home</a>
-            <a class="navigation-link" href="#"><i class="bi bi-person"></i> User</a>
-            <a href="/AdminOperations/AllOrders" class="navigation-link"><i class="bi bi-receipt"></i> Orders</a>
-            <a href="/Stock/Index" class="navigation-link"><i class="bi bi-archive"></i> Stock</a>
-            <a href="/Genre/Index" class="navigation-link"><i class="bi bi-collection"></i> Genre</a>
-            <a href="/Book/Index" class="navigation-link"><i class="bi bi-book"></i> Books</a>
+        <div class="sidenav pt-0  bg-white">
+            <div class="p-2 h-100">
+                <div class="nav-custom h-100">
+                    <div class="mb-2">
+                        <div class="py-3 dashboard-home">
+                            <a class="navbar-brand home-link" href="/Home/Index">BookStore</a>
+                        </div>
+                    </div>
+                    <div class="p-1">
+                        <a class="ad-nav navigation-link " href="/Home/Index"><i class="bi bi-house-door"></i> Home</a>
+                    </div>
+                    <div class="p-1">
+                        <a class="navigation-link ad-nav" href="#"><i class="bi bi-person"></i> User</a>
+                    </div>
+                    <div class="p-1">
+                        <a href="/AdminOperations/AllOrders" class="navigation-link ad-nav"><i class="bi bi-receipt"></i> Orders</a>
+                    </div>
+                    <div class="p-1">
+                        <a href="/Stock/Index" class="navigation-link ad-nav"><i class="bi bi-archive"></i> Stock</a>
+                    </div>
+                    <div class="p-1">
+                        <a href="/Genre/Index" class="navigation-link ad-nav"><i class="bi bi-collection"></i> Genre</a>
+                    </div>
+                    <div class="p-1">
+                        <a href="/Book/Index" class="navigation-link ad-nav"><i class="bi bi-book"></i> Books</a>
+                    </div>  
+                </div>
+            </div>
             @* <a href="/Reports/TopFiveSellingBooks" class="navigation-link"><i class="bi bi-bar-chart"></i> Top Salling Items</a> *@
         </div>
         <div class="right-panel">
-            <nav class="nav-bar">
-                <div class="nav-heading">Welcome @User.Identity?.Name</div>
-                <div class="nav-actions">
-                    <a href="/Identity/Account/Manage/Index" class="navigation-link"><i class="bi bi-gear"></i> Manage account</a>
-                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button type="submit" class="navigation-link">
-                            <i class="bi bi-box-arrow-left"></i> Logout
-                        </button>
-                    </form>
+            <nav class="nav-bar p-2 bg-white">
+                <div class="w-100">
+                    <div class="w-100 d-flex nav-custom px-3 py-2 justify-content-between top-nav">
+                        <div class="nav-heading">Welcome @User.Identity?.Name</div>
+                        <div class="nav-actions">
+                            <a href="/Identity/Account/Manage/Index" class="navigation-link"><i class="bi bi-gear"></i> Manage account</a>
+                            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="navigation-link">
+                                    <i class="bi bi-box-arrow-left"></i> Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </nav>
-            <div class="content">
+            <div class="content p-2 overflow-auto">
                 <div class="my-2">
                     <partial name="_Notification" />
                 </div>
@@ -48,7 +73,10 @@
         </div>
     </div>
 </body>
+
+</html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-</html>
+        crossorigin="anonymous">
+
+</script>
