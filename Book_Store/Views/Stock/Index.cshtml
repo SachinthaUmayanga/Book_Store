@@ -3,29 +3,35 @@
     Layout = "_AdminLayout";
 }
 
-<h2>Stocks</h2>
+<div class="nav-custom mb-4 py-2">
+    <h1 class="px-3 pt-2">Stocks</h1>
+</div>
+<div class="nav-custom mb-4 py-2 px-3">
+    <form asp-action="Index" method="get" class="my-4 d-flex gap-4">
+        <div class="input-group w-50">
+            <div class="input-group-text"><i class="bi bi-search"></i></div>
+            <input type="text" class="form-control" value="" id="sterm" name="sTerm" placeholder="Search by book" fdprocessedid="5hrbgs">
+        </div>
+        <button type="submit" class="btn btn-primary px-4">Find</button>
+        <a asp-action="Index" asp-controller="Stock" class="btn btn-primary px-4">Clear</a>
+    </form>
 
-<form asp-action="Index" method="get" class="my-2 d-flex gap-2">
-    <input type="text" name="sTerm" class="form-control w-25" placeholder="Search by book" />
-    <button type="submit" class="btn btn-primary">Find</button>
-    <a asp-action="Index" asp-controller="Stock" class="btn btn-primary">Clear</a>
-</form>
-
-<table class="table table-striped">
-    <tr>
-        <th>Book</th>
-        <th>Stock</th>
-        <th>Actions</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+    <table class="table table-striped">
         <tr>
-            <td>@item.BookName</td>
-            <td>@item.Quantity</td>
-            <td>
-                <a asp-action="ManageStock" asp-controller="Stock" asp-route-bookId="@item.BookId" class="btn btn-info">Update Stock</a>
-            </td>
+            <th>Book</th>
+            <th>Stock</th>
+            <th>Actions</th>
         </tr>
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BookName</td>
+                <td>@item.Quantity</td>
+                <td>
+                    <a asp-action="ManageStock" asp-controller="Stock" asp-route-bookId="@item.BookId" class="btn btn-info">Update Stock</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
 
