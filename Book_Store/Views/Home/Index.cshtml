@@ -44,11 +44,11 @@
                     <div class="p-4 pt-2 text-center d-flex flex-column justify-content-center align-items-center">
                         @if (string.IsNullOrEmpty(book.Image))
                         {
-                            <img class="p-4 pb-0" width="180px" height="200px" src="/images/Untitled.png" onclick="navigateToBookDetails(@book.Id)" alt="...">
+                            <img class="p-4 pb-0" style="cursor: pointer;" width="180px" height="200px" src="/images/Untitled.png" onclick="navigateToBookDetails(@book.Id)" alt="...">
                         }
                         else
                         {
-                            <img class="p-4 pb-0" width="180px" height="200px" src="/images/@book.Image" onclick="navigateToBookDetails(@book.Id)" alt="...">
+                            <img class="p-4 pb-0" style="cursor: pointer;" width="180px" height="200px" src="/images/@book.Image" onclick="navigateToBookDetails(@book.Id)" alt="...">
                         }
                         <p class="mb-0 text-uppercase fs-6 text-center text-truncate" style="max-width: 140px; cursor: pointer;"
                         onclick="navigateToBookDetails(@book.Id)" title="@book.BookName" data-bs-toggle="tooltip" data-bs-placement="top">
@@ -85,11 +85,11 @@
                     <div class="p-4 pt-2 text-center d-flex flex-column justify-content-center align-items-center">
                         @if (string.IsNullOrEmpty(book.Image))
                         {
-                            <img class="p-4 pb-0" width="180px" height="200px" src="/images/Untitled.png" alt="...">
+                            <img class="p-4 pb-0" style="cursor: pointer;" width="180px" height="200px" src="/images/Untitled.png" onclick="navigateToBookDetails(@book.Id)" alt="...">
                         }
                         else
                         {
-                            <img class="p-4 pb-0" width="180px" height="200px" src="/images/@book.Image" alt="...">
+                            <img class="p-4 pb-0" style="cursor: pointer;" width="180px" height="200px" src="/images/@book.Image" onclick="navigateToBookDetails(@book.Id)" alt="...">
                         }
                         <p class="mb-0 text-uppercase fs-6 text-center text-truncate" style="max-width: 140px; cursor: pointer;"
                           onclick="navigateToBookDetails(@book.Id)" title="@book.BookName" data-bs-toggle="tooltip" data-bs-placement="top">
@@ -178,5 +178,6 @@
             window.location.href = `/Home/BookDetails/${bookId}`;
         }
     </script>
+
 }
 
