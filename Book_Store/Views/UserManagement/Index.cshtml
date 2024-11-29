@@ -1,0 +1,50 @@
+﻿@* @model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser> *@
+@model IEnumerable<Book_Store.Repositories.UserWithRolesViewModel>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Index";
+}
+
+<div class="nav-custom mb-4 py-2 d-flex justify-content-between align-items-center">
+    <h2 class="px-3 pt-2">User Management</h2>
+    <a asp-action="AddUser" class="btn btn-primary me-3">Add User</a>
+</div>
+
+<div class="nav-custom mb-4 px-3 py-4">
+    @if (Model?.Any() == true)
+    {
+        <table class="table table-striped my-2">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>
+                            @foreach (var role in user.Roles)
+                            {
+                                <span class="badge @(role == "Admin" ? "bg-danger" : "bg-success")">@role</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="EditUser" asp-route-id="@user.UserId" class="btn btn-success">Edit</a>
+                            <a asp-action="DeleteUser" asp-route-id="@user.UserId" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h3>No users found</h3>
+    }
+</div>
