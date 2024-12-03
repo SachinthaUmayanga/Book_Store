@@ -62,12 +62,29 @@ namespace Book_Store.Repositories
         {
             var user = await _userManager.FindByIdAsync(model.UserId);
             if (user == null)
-                return IdentityResult.Failed();
+                return IdentityResult.Failed(new IdentityError { Description = "User not found." });
 
             user.UserName = model.UserName;
             user.Email = model.Email;
-            return await _userManager.UpdateAsync(user);
+
+            // Update user details
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+                return updateResult;
+
+            // Update user role
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            if (!string.IsNullOrEmpty(model.Role) && !currentRoles.Contains(model.Role))
+            {
+                await _userManager.RemoveFromRolesAsync(user, currentRoles); // Remove old roles
+                var roleResult = await _userManager.AddToRoleAsync(user, model.Role);
+                if (!roleResult.Succeeded)
+                    return IdentityResult.Failed(roleResult.Errors.ToArray());
+            }
+
+            return IdentityResult.Success;
         }
+
 
         public async Task<IdentityResult> DeleteUser(string userId)
         {

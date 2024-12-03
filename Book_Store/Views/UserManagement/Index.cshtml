@@ -35,7 +35,7 @@
                             }
                         </td>
                         <td>
-                            <a asp-action="EditUser" asp-route-id="@user.UserId" class="btn btn-success">Edit</a>
+                            <a asp-action="UpdateUser" asp-controller="UserManagement" asp-route-id="@user.UserId" class="btn btn-success">Edit</a>
                             <a asp-action="DeleteUser" asp-controller="UserManagement" asp-route-id="@user.UserId" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                         </td>
                     </tr>

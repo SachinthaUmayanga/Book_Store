@@ -58,15 +58,22 @@ public class UserManagementController : Controller
     [HttpGet]
     public async Task<IActionResult> UpdateUser(string id)
     {
+        // Fetch user by ID
         var user = await _userRepository.GetUserById(id);
         if (user == null)
             return NotFound();
 
+        // Populate roles dropdown
+        ViewBag.Roles = _roleManager.Roles.Select(r => r.Name).ToList();
+
+        // Return EditUserDTO to prefill form
         return View(new EditUserDTO
         {
             UserId = user.Id,
             UserName = user.UserName,
-            Email = user.Email
+            Email = user.Email,
+            Role = (await _userRepository.GetUsers())
+                      .FirstOrDefault(u => u.UserId == id)?.Roles.FirstOrDefault()
         });
     }
 
@@ -74,20 +81,25 @@ public class UserManagementController : Controller
     public async Task<IActionResult> UpdateUser(EditUserDTO model)
     {
         if (!ModelState.IsValid)
+        {
+            ViewBag.Roles = _roleManager.Roles.Select(r => r.Name).ToList(); // Re-populate roles on validation failure
             return View(model);
+        }
 
         var result = await _userRepository.UpdateUser(model);
         if (result.Succeeded)
         {
-            TempData["successMessage"] = "User update successfully.";
+            TempData["successMessage"] = "User updated successfully.";
             return RedirectToAction(nameof(Index));
         }
 
         foreach (var error in result.Errors)
             ModelState.AddModelError(string.Empty, error.Description);
 
-        return View(result);
+        ViewBag.Roles = _roleManager.Roles.Select(r => r.Name).ToList();
+        return View(model);
     }
+
 
 
     [HttpPost]
