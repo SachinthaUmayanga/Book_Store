@@ -9,8 +9,6 @@ namespace Book_Store.Repositories
         Task<IdentityResult> AddUser(AddUserDTO model);
         Task<IdentityResult> UpdateUser(EditUserDTO model);
         Task<IdentityResult> DeleteUser(string userId);
-        //Task<IdentityUser?> GetUserById(string id);
-        //Task<IEnumerable<IdentityUser>> GetUsers();
         Task<IEnumerable<UserWithRolesDTO>> GetUsers();
         Task<IdentityUser?> GetUserById(string userId);
     }
@@ -110,10 +108,6 @@ namespace Book_Store.Repositories
                 });
             }
         }
-
-        //public async Task<IdentityUser?> GetUserById(string id) => await _context.Users.FindAsync(id);
-
-        //public async Task<IEnumerable<IdentityUser>> GetUsers() => await _context.Users.ToListAsync();
 
         public async Task<IEnumerable<UserWithRolesDTO>> GetUsers()
         {
