@@ -43,7 +43,8 @@ public class AdminOperationsController : Controller
         }
         var orderStatusList = (await _userOrderRepository.GetOrderStatuses()).Select(orderStatus =>
         {
-            return new SelectListItem { Value = orderStatus.Id.ToString(), Text = orderStatus.StatusName, Selected = order.OrderStatusId == orderStatus.Id };
+            return new SelectListItem { Value = orderStatus.Id.ToString(), Text = orderStatus.StatusName, 
+                Selected = order.OrderStatusId == orderStatus.Id };
         });
         var data = new UpdateOrderStatusModel
         {
@@ -63,7 +64,8 @@ public class AdminOperationsController : Controller
             {
                 data.OrderStatusList = (await _userOrderRepository.GetOrderStatuses()).Select(orderStatus =>
                 {
-                    return new SelectListItem { Value = orderStatus.Id.ToString(), Text = orderStatus.StatusName, Selected = orderStatus.Id == data.OrderStatusId };
+                    return new SelectListItem { Value = orderStatus.Id.ToString(), Text = orderStatus.StatusName, 
+                        Selected = orderStatus.Id == data.OrderStatusId };
                 });
 
                 return View(data);

@@ -1,5 +1,5 @@
 ﻿@* @model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser> *@
-@model IEnumerable<Book_Store.Repositories.UserWithRolesViewModel>
+@model IEnumerable<UserWithRolesDTO>
 @{
     Layout = "_AdminLayout";
     ViewData["Title"] = "Index";
@@ -36,7 +36,7 @@
                         </td>
                         <td>
                             <a asp-action="EditUser" asp-route-id="@user.UserId" class="btn btn-success">Edit</a>
-                            <a asp-action="DeleteUser" asp-route-id="@user.UserId" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                            <a asp-action="DeleteUser" asp-controller="UserManagement" asp-route-id="@user.UserId" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                         </td>
                     </tr>
                 }

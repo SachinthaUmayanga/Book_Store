@@ -50,6 +50,20 @@ namespace Book_Store.Repositories
             return stocks;
         }
 
+        public async Task<IEnumerable<StockDisplayModel>> GetStocksForReport()
+        {
+            return await (from book in _context.Books
+                          join stock in _context.Stocks
+                          on book.Id equals stock.BookId
+                          into book_stock
+                          from bookStok in book_stock.DefaultIfEmpty()
+                          select new StockDisplayModel
+                          {
+                              BookId = book.Id,
+                              BookName = book.BookName,
+                              Quantity = bookStok == null ? 0 : bookStok.Quantity
+                          }).ToListAsync();
+        }
 
     }
 }
