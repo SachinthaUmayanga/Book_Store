@@ -1,0 +1,23 @@
+﻿@model EditUserDTO
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "UpdateUser";
+}
+
+<div class="container">
+    <h2>Edit User</h2>
+    <form asp-action="EditUser" method="post">
+        <input asp-for="UserId" type="hidden" />
+        <div class="mb-3">
+            <label asp-for="UserName" class="form-label">Username</label>
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>

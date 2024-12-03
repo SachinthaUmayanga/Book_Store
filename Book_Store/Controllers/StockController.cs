@@ -50,5 +50,43 @@ namespace Book_Store.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GenerateReport()
+        {
+            var stocks = await _stoctRepo.GetStocksForReport();
+
+            using (var stream = new MemoryStream())
+            {
+                var writer = new iText.Kernel.Pdf.PdfWriter(stream);
+                var pdf = new iText.Kernel.Pdf.PdfDocument(writer);
+                var document = new iText.Layout.Document(pdf);
+
+                // Add title
+                document.Add(new iText.Layout.Element.Paragraph("Stock Report")
+                    .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
+                    .SetFontSize(18));
+                    
+
+                // Add table
+                var table = new iText.Layout.Element.Table(3);
+                table.AddHeaderCell("Book ID");
+                table.AddHeaderCell("Book Name");
+                table.AddHeaderCell("Quantity");
+
+                foreach (var stock in stocks)
+                {
+                    table.AddCell(stock.BookId.ToString());
+                    table.AddCell(stock.BookName);
+                    table.AddCell(stock.Quantity.ToString());
+                }
+
+                document.Add(table);
+                document.Close();
+
+                return File(stream.ToArray(), "application/pdf", "StockReport.pdf");
+            }
+        }
+
     }
 }

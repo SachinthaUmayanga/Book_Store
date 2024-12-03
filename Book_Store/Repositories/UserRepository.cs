@@ -6,12 +6,13 @@ namespace Book_Store.Repositories
 {
     public interface IUserRepository
     {
-        Task AddUser(IdentityUser user);
-        Task UpdateUser(IdentityUser user);
-        Task DeleteUser(IdentityUser user);
+        Task<IdentityResult> AddUser(AddUserDTO model);
+        Task<IdentityResult> UpdateUser(EditUserDTO model);
+        Task<IdentityResult> DeleteUser(string userId);
         //Task<IdentityUser?> GetUserById(string id);
         //Task<IEnumerable<IdentityUser>> GetUsers();
-        Task<IEnumerable<UserWithRolesViewModel>> GetUsers();
+        Task<IEnumerable<UserWithRolesDTO>> GetUsers();
+        Task<IdentityUser?> GetUserById(string userId);
     }
 
 
@@ -27,36 +28,85 @@ namespace Book_Store.Repositories
             _userManager = userManager;
         }
 
-        public async Task AddUser(IdentityUser user)
+        public async Task<IdentityResult> AddUser(AddUserDTO model)
         {
-            await _userManager.CreateAsync(user);
+            var user = new IdentityUser
+            {
+                UserName = model.UserName,
+                Email = model.Email
+            };
+
+            // Create user with hashed password
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+                return result;
+
+            // Assign role to the user
+            if (!string.IsNullOrEmpty(model.Role))
+            {
+                var roleResult = await _userManager.AddToRoleAsync(user, model.Role);
+                if (!roleResult.Succeeded)
+                {
+                    // If role assignment fails, delete the user and return the role errors
+                    await _userManager.DeleteAsync(user);
+                    return IdentityResult.Failed(roleResult.Errors.ToArray());
+                }
+            }
+
+            return result;
         }
 
-        public async Task UpdateUser(IdentityUser user)
+        public async Task<IdentityUser?> GetUserById(string userId) => await _userManager.FindByIdAsync(userId);
+
+        public async Task<IdentityResult> UpdateUser(EditUserDTO model)
         {
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+                return IdentityResult.Failed();
+
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+            return await _userManager.UpdateAsync(user);
         }
 
-        public async Task DeleteUser(IdentityUser user)
+        public async Task<IdentityResult> DeleteUser(string userId)
         {
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                if (user == null)
+                    return IdentityResult.Failed(new IdentityError
+                    {
+                        Description = "User not found."
+                    });
+                return await _userManager.DeleteAsync(user);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                Console.WriteLine($"Error deleting user: {ex.Message}");
+
+                // Return a fail result with a generic error message
+                return IdentityResult.Failed(new IdentityError
+                {
+                    Description = "An error occurred while deleting the user."
+                });
+            }
         }
 
         //public async Task<IdentityUser?> GetUserById(string id) => await _context.Users.FindAsync(id);
 
         //public async Task<IEnumerable<IdentityUser>> GetUsers() => await _context.Users.ToListAsync();
 
-        public async Task<IEnumerable<UserWithRolesViewModel>> GetUsers()
+        public async Task<IEnumerable<UserWithRolesDTO>> GetUsers()
         {
             var users = await _userManager.Users.ToListAsync();
-            var userWithRoles = new List<UserWithRolesViewModel>();
+            var userWithRoles = new List<UserWithRolesDTO>();
 
             foreach (var user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                userWithRoles.Add(new UserWithRolesViewModel
+                userWithRoles.Add(new UserWithRolesDTO
                 {
                     UserId = user.Id,
                     UserName = user.UserName,
@@ -67,14 +117,6 @@ namespace Book_Store.Repositories
 
             return userWithRoles;
         }
-    }
-
-    public class UserWithRolesViewModel
-    {
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public IList<string> Roles { get; set; }
     }
 
 }
