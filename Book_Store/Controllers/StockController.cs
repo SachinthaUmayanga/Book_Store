@@ -1,6 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using crypto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Book_Store.Repositories.StockRepository;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Signatures;
+using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Crypto.Digests;
 
 namespace Book_Store.Controllers
 {
@@ -51,25 +58,38 @@ namespace Book_Store.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+        
         public async Task<IActionResult> GenerateReport()
         {
-            var stocks = await _stoctRepo.GetStocksForReport();
-
-            using (var stream = new MemoryStream())
+            try
             {
-                var writer = new iText.Kernel.Pdf.PdfWriter(stream);
-                var pdf = new iText.Kernel.Pdf.PdfDocument(writer);
-                var document = new iText.Layout.Document(pdf);
+                var stocks = await _stoctRepo.GetStocksForReport();
 
-                // Add title
-                document.Add(new iText.Layout.Element.Paragraph("Stock Report")
+                if (stocks == null || !stocks.Any())
+                {
+                    TempData["errorMessage"] = "No data available to generate the report.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                var stream = new MemoryStream();
+                var writer = new PdfWriter(stream);
+                var pdf = new PdfDocument(writer);
+                var document = new Document(pdf);
+
+                // Title
+                document.Add(new Paragraph("Stock Report")
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
-                    .SetFontSize(18));
-                    
+                    .SetFontSize(20));
 
-                // Add table
-                var table = new iText.Layout.Element.Table(3);
+                // Date
+                document.Add(new Paragraph($"Generated on: {DateTime.Now:yyyy-MM-dd HH:mm:ss}")
+                    .SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT)
+                    .SetFontSize(10));
+
+                document.Add(new Paragraph("\n")); // Add space
+
+                // Table
+                var table = new Table(3);
                 table.AddHeaderCell("Book ID");
                 table.AddHeaderCell("Book Name");
                 table.AddHeaderCell("Quantity");
@@ -84,7 +104,15 @@ namespace Book_Store.Controllers
                 document.Add(table);
                 document.Close();
 
+                stream.Position = 0; // Reset position before returning the file
                 return File(stream.ToArray(), "application/pdf", "StockReport.pdf");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GenerateReport: {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+                TempData["errorMessage"] = "Failed to generate report. Please try again later.";
+                return RedirectToAction(nameof(Index));
             }
         }
 
