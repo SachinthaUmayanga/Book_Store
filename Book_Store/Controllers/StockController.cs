@@ -1,4 +1,4 @@
-﻿using crypto;
+﻿using iTextSharp.text.pdf.crypto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Book_Store.Repositories.StockRepository;
@@ -21,7 +21,7 @@ namespace Book_Store.Controllers
             _stoctRepo = stoctRepo;
         }
 
-        public async Task<IActionResult> Index(string sTerm="")
+        public async Task<IActionResult> Index(string sTerm = "")
         {
             var stocks = await _stoctRepo.GetStocks(sTerm);
             return View(stocks);
@@ -58,7 +58,7 @@ namespace Book_Store.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        
+
         public async Task<IActionResult> GenerateReport()
         {
             try
@@ -115,6 +115,5 @@ namespace Book_Store.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-
     }
 }
