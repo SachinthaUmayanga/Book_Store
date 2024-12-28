@@ -35,28 +35,31 @@
     <h1 class="px-3 pt-2">Dashboard</h1>
 </div>
 <div class="nav-custom mb-4 p-3">
-    <div class="d-flex gap-5 align-items-center justify-content-center">
-        <div id="donut-chart" class="chat"></div>
-        <div id="donut-chart-1" class="chat"></div>
+    <div class="d-flex flex-column gap-5 align-items-center justify-content-center">
+        <h1 class="px-3 pt-2">Orders List</h1>
+        <div class="d-flex">
+            <div id="donut-chart" class="chat"></div>
+            <div id="donut-chart-1" class="chat"></div>
+        </div>
     </div>
 </div>
 
-@* <div class="nav-custom">
-    <div class="d-flex gap-3 align-items-center justify-content-center">
-        <div id="donut-chart" class="chat"></div>
-        <div id="donut-chart-1" class="chat"></div>
+<div class="nav-custom p-4">
+    <div class="d-flex flex-column gap-3 align-items-center justify-content-center">
+        <h1 class="px-3 pt-2">Orders List</h1>
+        <canvas id="myChart" width="900" height="400"></canvas>
     </div>
-</div> *@
+</div>
 
 
 <script>
     let chart = bb.generate({
         data: {
             columns: [
-                ["Blue", 12],
-                ["orange", 20],
-                ["green", 25],
-                ["blue", 30],
+                ["Action", 12],
+                ["Fantasy", 20],
+                ["Horror", 25],
+                ["Science", 30],
             ],
             type: "donut",
             onclick: function (d, i) {
@@ -70,7 +73,7 @@
             },
         },
         donut: {
-            title: "Total Books 100",
+            title: "Used Books 87",
         },
         bindto: "#donut-chart",
     });
@@ -78,10 +81,10 @@
     let chart2 = bb.generate({
         data: {
             columns: [
-                ["Blue", 12],
-                ["orange", 20],
-                ["green", 25],
-                ["blue", 30],
+                ["Action", 12],
+                ["Fantasy", 20],
+                ["Horror", 25],
+                ["Science", 37],
             ],
             type: "donut",
             onclick: function (d, i) {
@@ -95,24 +98,23 @@
             },
         },
         donut: {
-            title: "Total Books 100",
+            title: "New Books 94",
         },
         bindto: "#donut-chart-1",
     });
 </script>
 
-@* <canvas id="myChart" width="900" height="400"></canvas>
 <script type="text/javascript">
 
     let ctx = document.getElementById("myChart");
     let myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["CS", "IT", "ECE", "EE", "ME", "BE"],
+            labels: ["11/26", "11/27", "11/28", "11/29", "11/30", "12/01"],
             datasets: [
                 {
-                    label: '# of students',
-                    data: [105, 124, 78, 91, 62, 56],
+                    label: '# of orders',
+                    data: [10, 12, 5, 2, 1, 16],
                     backgroundColor: ['rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
@@ -144,4 +146,4 @@
         }
     });
 
-</script> *@
+</script>
