@@ -9,10 +9,16 @@ namespace Book_Store.Controllers;
 public class AdminOperationsController : Controller
 {
     private readonly IUserOrderRepository _userOrderRepository;
+    private readonly IBookRepository _booksRepository;
+    private readonly IGenreRepository _genreRepository;
+    private readonly IStockRepository _stoctRepository;
 
-    public AdminOperationsController(IUserOrderRepository userOrderRepository)
+    public AdminOperationsController(IUserOrderRepository userOrderRepository, IBookRepository booksRepository, IGenreRepository genreRepository, IStockRepository stoctRepository)
     {
         _userOrderRepository = userOrderRepository;
+        _booksRepository = booksRepository;
+        _genreRepository = genreRepository;
+        _stoctRepository = stoctRepository;
     }
     
     public async Task<IActionResult> AllOrders()
@@ -81,8 +87,54 @@ public class AdminOperationsController : Controller
         return RedirectToAction(nameof(AllOrders), new { orderId = data.OrderId });
     }
 
-    public IActionResult Dashboard()
+    public async Task<IActionResult> Dashboard()
     {
-        return View();
+        var orders = await _userOrderRepository.UserOrders(true);
+        var booklist = await _booksRepository.GetBooks();
+        var genreList = await _genreRepository.GetGenres();
+        var stockList = await _stoctRepository.GetStocks();
+
+        var newBooks = booklist.Where(b => b.BookCondition == "New").ToList();
+        var usedBooks = booklist.Where(b => b.BookCondition == "Used").ToList();
+
+        var ordermappedData = orders.GroupBy(o => o.CreateDate.ToString("yyyy/MM/dd")).Select(group => new DashboardOrderDetailsDTO
+    {
+        OrderDate = group.Key, 
+        Count = group.Count() 
+    }).ToList();
+
+        var newGenreMappedData = newBooks
+            .Join(stockList,
+                  book => book.Id,
+                  stock => stock.BookId,
+                  (book, stock) => new { book, stock }) 
+            .GroupBy(x => x.book.Genre.GenreName)
+            .Select(group => new DashboardBookDetailsDTO
+            {
+                Category = group.Key,
+                Count = group.Sum(x => x.stock.Quantity)
+            })
+            .ToList();        
+        var usedGenreMappedData = usedBooks
+            .Join(stockList,
+                  book => book.Id,
+                  stock => stock.BookId,
+                  (book, stock) => new { book, stock }) 
+            .GroupBy(x => x.book.Genre.GenreName)
+            .Select(group => new DashboardBookDetailsDTO
+            {
+                Category = group.Key,
+                Count = group.Sum(x => x.stock.Quantity)
+            })
+            .ToList();
+
+        var dashboardDetails = new DashboardDTO
+        {
+            NewBooks = newGenreMappedData,
+            UsedBooks = usedGenreMappedData,
+            OrderDetails = ordermappedData
+        };
+
+        return View(dashboardDetails);
     }
 }

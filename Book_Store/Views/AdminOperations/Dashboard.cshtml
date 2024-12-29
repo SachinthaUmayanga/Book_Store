@@ -1,4 +1,4 @@
-﻿
+﻿@model DashboardDTO
 @{
     Layout = "_AdminLayout";
     ViewData["Title"] = "Dashboard";
@@ -35,29 +35,36 @@
     <h1 class="px-3 pt-2">Dashboard</h1>
 </div>
 <div class="nav-custom mb-4 p-3">
-    <div class="d-flex gap-5 align-items-center justify-content-center">
-        <div id="donut-chart" class="chat"></div>
-        <div id="donut-chart-1" class="chat"></div>
+    <div class="d-flex flex-column gap-5 align-items-center justify-content-center">
+        <h1 class="px-3 pt-2">Book List</h1>
+        <div class="d-flex">
+            <div id="donut-chart" class="chat"></div>
+            <div id="donut-chart-1" class="chat"></div>
+        </div>
     </div>
 </div>
 
-@* <div class="nav-custom">
-    <div class="d-flex gap-3 align-items-center justify-content-center">
-        <div id="donut-chart" class="chat"></div>
-        <div id="donut-chart-1" class="chat"></div>
+<div class="nav-custom p-4">
+    <div class="d-flex flex-column gap-3 align-items-center justify-content-center">
+        <h1 class="px-3 pt-2">Orders List</h1>
+        <canvas id="myChart" width="900" height="400"></canvas>
     </div>
-</div> *@
+</div>
 
 
 <script>
+    var converetdNewBooks = @Html.Raw(Json.Serialize(Model.NewBooks));
+    var converetdUsedBooks = @Html.Raw(Json.Serialize(Model.UsedBooks));
+    var newBooksData = converetdNewBooks.map(book => [book.category, book.count]);
+    var usedBooksData = converetdUsedBooks.map(book => [book.category, book.count]);
+    var totalNewBooks = 0;
+    var totalUsedBooks = 0;
+    converetdNewBooks.forEach(book => totalNewBooks += book.count);  
+    converetdUsedBooks.forEach(book => totalUsedBooks += book.count);
+
     let chart = bb.generate({
         data: {
-            columns: [
-                ["Blue", 12],
-                ["orange", 20],
-                ["green", 25],
-                ["blue", 30],
-            ],
+            columns: usedBooksData,
             type: "donut",
             onclick: function (d, i) {
                 console.log("onclick", d, i);
@@ -70,19 +77,14 @@
             },
         },
         donut: {
-            title: "Total Books 100",
+            title: `Used Books ${totalUsedBooks}`,
         },
         bindto: "#donut-chart",
     });
 
     let chart2 = bb.generate({
         data: {
-            columns: [
-                ["Blue", 12],
-                ["orange", 20],
-                ["green", 25],
-                ["blue", 30],
-            ],
+            columns: newBooksData,
             type: "donut",
             onclick: function (d, i) {
                 console.log("onclick", d, i);
@@ -95,24 +97,33 @@
             },
         },
         donut: {
-            title: "Total Books 100",
+            title: `New Books ${totalNewBooks}`,
         },
         bindto: "#donut-chart-1",
     });
 </script>
 
-@* <canvas id="myChart" width="900" height="400"></canvas>
 <script type="text/javascript">
+    var converetdOrderDetails = @Html.Raw(Json.Serialize(Model.OrderDetails));
+    var orderDates = converetdOrderDetails.map(orderDates => orderDates.orderDate);
+    var orderCount = converetdOrderDetails.map(orderDates => orderDates.count);
 
+    var totalOrdedrs = 0;
+    converetdOrderDetails.forEach(order => totalOrdedrs += order.count);
+
+    console.log(totalOrdedrs)
+    console.log(converetdOrderDetails)
+    console.log(orderDates)
+    console.log(orderCount)
     let ctx = document.getElementById("myChart");
     let myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["CS", "IT", "ECE", "EE", "ME", "BE"],
+            labels: orderDates,
             datasets: [
                 {
-                    label: '# of students',
-                    data: [105, 124, 78, 91, 62, 56],
+                    label: `${totalOrdedrs} of orders`,
+                    data: orderCount,
                     backgroundColor: ['rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
@@ -144,4 +155,4 @@
         }
     });
 
-</script> *@
+</script>
