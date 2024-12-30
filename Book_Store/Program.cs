@@ -31,6 +31,7 @@ builder.Services.AddTransient<IGenreRepository, GenreRepository>();
 builder.Services.AddTransient<IFileService, FileService>();
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IReviewRepository, ReviewRepository>();
 
 var app = builder.Build();
 //using (var scope = app.Services.CreateScope())

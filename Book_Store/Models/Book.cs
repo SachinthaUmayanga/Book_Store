@@ -34,6 +34,8 @@ namespace Book_Store.Models
 
         public List<CartDetail> CartDetail { get; set; }
 
+        public virtual ICollection<Review> Reviews { get; set; }
+
         public Stock Stock { get; set; }
 
         [NotMapped]
@@ -41,5 +43,6 @@ namespace Book_Store.Models
 
         [NotMapped]
         public int Quantity { get; set; }
+
     }
 }
